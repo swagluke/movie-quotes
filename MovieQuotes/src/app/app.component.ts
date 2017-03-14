@@ -4,6 +4,7 @@ import { AngularFire, FirebaseListObservable } from "angularfire2";
 interface MovieQuote {
   movie: string;
   quote: string;
+  $key?: string;
 }
 
 @Component({
@@ -28,12 +29,29 @@ export class AppComponent {
   onSubmit(): void {
     try {
       //this.moviequotes.unshift(this.formMovieQuote);
-      this.movieQuotesStream.push(this.formMovieQuote);
+      if (this.formMovieQuote.$key) {
+        this.movieQuotesStream.update(this.formMovieQuote.$key,
+          {
+            'quote': this.formMovieQuote.quote,
+            'movie': this.formMovieQuote.movie
+          });
+      } else {
+        this.movieQuotesStream.push(this.formMovieQuote);
+      }
+
       this.formMovieQuote = {
         'quote': '', 'movie': ''
       };
     } catch (e) {
       console.log("Submit error", e);
     }
+  }
+
+  edit(movieQuoteToEdit: MovieQuote): void {
+    this.formMovieQuote = movieQuoteToEdit;
+  }
+
+  delete(keyToDelete: string): void {
+    this.movieQuotesStream.remove(keyToDelete);
   }
 }
