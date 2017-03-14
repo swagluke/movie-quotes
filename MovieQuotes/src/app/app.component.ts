@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AngularFire } from "angularfire2";
+import { AngularFire, FirebaseListObservable } from "angularfire2";
 
 interface MovieQuote {
   movie: string;
@@ -17,20 +17,23 @@ export class AppComponent {
     'movie': ''
   };
 
-  moviequotes: Array<MovieQuote> = [
-    { "movie": "Rocky", "quote": "Yo Adrian" },
-    { "movie": "Terminator", "quote": "I'll be back" },
-    { "movie": "Titanic", "quote": "I'm the king of the world!" },
-    { "movie": "The Princess Bride", "quote": "Hello. My name is Inigo Montoya. You killed my father. Prepare to die." }];
+  movieQuotesStream: FirebaseListObservable<MovieQuote[]>;
 
-    constructor(private af: AngularFire){
-      
-    }
+  constructor(private af: AngularFire) {
+    this.movieQuotesStream = af.database.list("/quotes");
+
+    //this.movieQuotesStream.subscribe((moviequotes: MovieQuote[]) =>)
+  }
 
   onSubmit(): void {
-    this.moviequotes.unshift(this.formMovieQuote);
-    this.formMovieQuote = {
-      'quote': '', 'movie':''
-    };
+    try {
+      //this.moviequotes.unshift(this.formMovieQuote);
+      this.movieQuotesStream.push(this.formMovieQuote);
+      this.formMovieQuote = {
+        'quote': '', 'movie': ''
+      };
+    } catch (e) {
+      console.log("Submit error", e);
+    }
   }
 }
