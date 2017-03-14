@@ -26,3 +26,22 @@
     </form>
   </div>
 </div>
+<hr>
+<div class="container">
+  <div class="panel">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Quote</th>
+          <th>Movie</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let moviequote of moviequotes">
+          <td>{{moviequote.quote}}</td>
+          <td>{{moviequote.movie}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
