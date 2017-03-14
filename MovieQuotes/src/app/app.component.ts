@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AngularFire } from "angularfire2";
 
 interface MovieQuote {
   movie: string;
@@ -21,6 +22,10 @@ export class AppComponent {
     { "movie": "Terminator", "quote": "I'll be back" },
     { "movie": "Titanic", "quote": "I'm the king of the world!" },
     { "movie": "The Princess Bride", "quote": "Hello. My name is Inigo Montoya. You killed my father. Prepare to die." }];
+
+    constructor(private af: AngularFire){
+      
+    }
 
   onSubmit(): void {
     this.moviequotes.unshift(this.formMovieQuote);
