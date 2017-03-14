@@ -1,10 +1,18 @@
 import { Component } from '@angular/core';
 
+interface MovieQuote {
+  movie: string;
+  quote: string;
+}
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'app works!';
+  moviequote: MovieQuote = {
+    'quote': 'Everything is awesome',
+    'movie': 'The Lego Movie'
+  };
 }

@@ -1,3 +1,15 @@
-<h1>
-  {{title}}
-</h1>
+<nav class="navbar navbar-inverse">
+  <div class="container">
+    <h1>
+      Movie Quotes
+    </h1>
+  </div>
+
+</nav>
+
+
+<input type="text" name="quote" placeholder="Quote" [(ngModel)]="moviequote.quote"><br>
+<input type="text" name="movie" placeholder="Movie" [(ngModel)]="moviequote.movie">
+<p>
+  The best quote from <b>{{moviequote.movie}}</b> is "<b> {{moviequote.quote}}</b>".
+</p>
