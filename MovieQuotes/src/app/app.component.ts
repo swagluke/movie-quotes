@@ -11,8 +11,12 @@ interface MovieQuote {
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  moviequote: MovieQuote = {
-    'quote': 'Everything is awesome',
-    'movie': 'The Lego Movie'
+  formMovieQuote: MovieQuote = {
+    'quote': '',
+    'movie': ''
   };
+
+  onSubmit(): void {
+    console.log("You wish to submit a movie quote", this.formMovieQuote);
+  }
 }

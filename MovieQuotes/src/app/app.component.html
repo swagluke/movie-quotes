@@ -7,9 +7,22 @@
 
 </nav>
 
-
-<input type="text" name="quote" placeholder="Quote" [(ngModel)]="moviequote.quote"><br>
-<input type="text" name="movie" placeholder="Movie" [(ngModel)]="moviequote.movie">
-<p>
-  The best quote from <b>{{moviequote.movie}}</b> is "<b> {{moviequote.quote}}</b>".
-</p>
+<div class="container">
+  <div class="well well-lg">
+    <form #mqForm="ngForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <input required type="text" class="form-control" name="quote" placeholder="Quote" [(ngModel)]="formMovieQuote.quote"><br>
+      </div>
+      <div class="form-group">
+        <input required type="text" class="form-control" name="movie" placeholder="Movie" [(ngModel)]="formMovieQuote.movie">
+      </div>
+      <p *ngIf="formMovieQuote.quote && formMovieQuote.movie">
+        The best quote from <b>{{formMovieQuote.movie}}</b> is "<b> {{formMovieQuote.quote}}</b>".
+      </p>
+      <button [disabled]="!mqForm.form.valid" type="submit" class="btn btn-default pull-right">
+        Submit
+      </button>
+      <div class="clearfix"></div>
+    </form>
+  </div>
+</div>
